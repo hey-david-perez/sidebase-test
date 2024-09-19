@@ -1,6 +1,6 @@
 export default defineTask({
     meta: {
-        name: "demo:nitrotask",
+        name: "nitrotask",
         description: "Run fake database migrations",
     },
     run({ payload, context }) {

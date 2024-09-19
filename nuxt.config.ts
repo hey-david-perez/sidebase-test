@@ -6,12 +6,12 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@nuxtjs/i18n',
     'nuxt-scheduler',
+    '@vueuse/nuxt'
   ],
   nitro: {
     experimental: {
       tasks: true,
       websocket: true,
-      openAPI: true,
     },
     scheduledTasks: {
       '* * * * 1': ['demo:nitrotask']
