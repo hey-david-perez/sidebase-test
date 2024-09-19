@@ -20,6 +20,9 @@ dependencies:
   nuxt:
     specifier: ^3.12.4
     version: 3.12.4(@types/node@20.11.30)(eslint@8.57.0)(rollup@4.21.3)(typescript@5.4.3)(vite@5.4.6)(vue-tsc@2.0.7)
+  nuxt-scheduler:
+    specifier: ^0.1.9
+    version: 0.1.9(rollup@4.21.3)
   superjson:
     specifier: ^2.2.1
     version: 2.2.1
@@ -6128,6 +6131,13 @@ packages:
   /node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
 
+  /node-cron@3.0.3:
+    resolution: {integrity: sha512-dOal67//nohNgYWb+nWmg5dkFdIwDm8EpeGYMekPMrngV3637lqnX0lbUcCtgibHTz6SEz7DAIjKvKDFYCnO1A==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      uuid: 8.3.2
+    dev: false
+
   /node-fetch-native@1.6.4:
     resolution: {integrity: sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==}
 
@@ -6210,6 +6220,19 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.3
+    dev: false
+
+  /nuxt-scheduler@0.1.9(rollup@4.21.3):
+    resolution: {integrity: sha512-2WOEBhhVCpDvt0SpxZGMGhtsMVT6PLRI0yRgVFvWLw6mu6NqAPfof6HW9kP7ENOEJ2p5DXIk6CajVBl6LN0Htg==}
+    dependencies:
+      '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.21.3)
+      defu: 6.1.4
+      node-cron: 3.0.3
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
+      - webpack-sources
     dev: false
 
   /nuxt@3.12.4(@types/node@20.11.30)(eslint@8.57.0)(rollup@4.21.3)(typescript@5.4.3)(vite@5.4.6)(vue-tsc@2.0.7):

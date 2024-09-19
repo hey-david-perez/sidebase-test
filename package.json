@@ -14,27 +14,28 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "superjson": "^2.2.1",
-    "zod": "^3.22.4",
-    "trpc-nuxt": "^0.10.21",
+    "@prisma/client": "^5.18.0",
     "@trpc/client": "^10.45.2",
     "@trpc/server": "^10.45.2",
-    "@prisma/client": "^5.18.0",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "nuxt-scheduler": "^0.1.9",
+    "superjson": "^2.2.1",
+    "trpc-nuxt": "^0.10.21",
+    "vue": "latest",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^8.4.0",
-    "@sidebase/nuxt-auth": "^0.8.2",
-    "prisma": "^5.18.0",
-    "@bg-dev/nuxt-naiveui": "1.0.0-edge.2",
-    "@nuxtjs/tailwindcss": "^6.11.4",
-    "@types/node": "^20.11.30",
-    "typescript": "^5.4.3",
-    "vue-tsc": "^2.0.7",
-    "oxlint": "^0.7.2",
     "@antfu/eslint-config": "^2.26.0",
-    "eslint": "^8.57.0"
+    "@bg-dev/nuxt-naiveui": "1.0.0-edge.2",
+    "@nuxtjs/i18n": "^8.4.0",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@sidebase/nuxt-auth": "^0.8.2",
+    "@types/node": "^20.11.30",
+    "eslint": "^8.57.0",
+    "oxlint": "^0.7.2",
+    "prisma": "^5.18.0",
+    "typescript": "^5.4.3",
+    "vue-tsc": "^2.0.7"
   },
   "peerDependencies": {
     "next-auth": "4.21.1"

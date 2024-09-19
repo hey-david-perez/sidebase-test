@@ -4,8 +4,17 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@bg-dev/nuxt-naiveui',
     '@sidebase/nuxt-auth',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    'nuxt-scheduler',
   ],
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    scheduledTasks: {
+      '* * * * 1': ['demo:nitrotask']
+    },
+  },
   i18n: {
     strategy: 'prefix_except_default',
     lazy: true,
