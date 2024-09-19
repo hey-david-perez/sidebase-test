@@ -30,6 +30,11 @@
         <div class="card">
           <WelcomeI18nDemo />
         </div>
+        <div class="card">
+          <ClientOnly>
+            <WelcomeWebSockets/>
+          </ClientOnly>
+        </div>
       </div>
     </div>
 
