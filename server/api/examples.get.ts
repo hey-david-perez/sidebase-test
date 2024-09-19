@@ -11,11 +11,18 @@
  * ```
  */
 export default defineEventHandler(event => {
-    return event.context.prisma.agents.findMany({
+    const elements =  event.context.prisma.agents.findMany({
         where: {
-            dimensions: {
-
+            Dimensions: {
+                Agents: {
+                    every: {
+                        new_field: {
+                            contains: 'test'
+                        }
+                    }
+                }
             }
         }
     })
+    return elements
 })

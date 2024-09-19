@@ -1,4 +1,4 @@
-# my-sidebase-experiment-app
+# my-sidebase-opportunity-app
 
 This is a [sidebase merino](https://sidebase.io/) app created by running `pnpm create sidebase@latest`. This project uses the following technologies for a great developer- and user-experience:
 - [TypeScript](https://www.typescriptlang.org/)
@@ -9,7 +9,6 @@ This is a [sidebase merino](https://sidebase.io/) app created by running `pnpm c
 - tRPC 10
 - nuxt-auth
 - i18n
-- GitHub Actions based CI
 - Linting via ESLint and @antfu/eslint-config
 
 ## How to get going?

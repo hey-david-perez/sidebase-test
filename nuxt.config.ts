@@ -6,8 +6,6 @@ export default defineNuxtConfig({
     '@sidebase/nuxt-auth',
     '@nuxtjs/i18n'
   ],
-  devtools: { enabled: true },
-
   i18n: {
     strategy: 'prefix_except_default',
     lazy: true,
@@ -24,16 +22,12 @@ export default defineNuxtConfig({
       localeDetector: './localeDetector.ts'
     }
   },
-
   build: {
     transpile: [
       'trpc-nuxt'
     ]
   },
-
   typescript: {
     shim: false
-  },
-
-  compatibilityDate: '2024-08-08'
+  }
 })
