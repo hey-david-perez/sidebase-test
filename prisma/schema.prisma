@@ -145,3 +145,10 @@ model TrainingExperiences {
   eventSequencesId Int?
   EventSequences   EventSequences? @relation(fields: [eventSequencesId], references: [id])
 }
+
+model Messages {
+  id        Int      @id @default(autoincrement())
+  created_at  DateTime @default(now())
+  user        String
+  message     String
+}

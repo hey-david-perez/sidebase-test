@@ -10,6 +10,8 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       tasks: true,
+      websocket: true,
+      openAPI: true,
     },
     scheduledTasks: {
       '* * * * 1': ['demo:nitrotask']
