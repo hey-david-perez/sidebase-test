@@ -11,10 +11,10 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       tasks: true,
-      websocket: true,
+      openAPI: true,
     },
     scheduledTasks: {
-      '* * * * 1': ['demo:nitrotask']
+      '* * * * 1': ['nitrotask']
     },
   },
   i18n: {
@@ -40,5 +40,9 @@ export default defineNuxtConfig({
   },
   typescript: {
     shim: false
+  },
+  compatibilityDate: '2024-09-19',
+  devtools: {
+    enabled: false,
   }
 })
