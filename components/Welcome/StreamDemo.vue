@@ -63,21 +63,34 @@ async function handleSendMessage() {
     <textarea v-model="message" placeholder="Enter your message" class="bg-gray-800 w-full p-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
     <button @click="handleSendMessage" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Send</button>
     <div v-if="parsedResponse" class="gap-4 grid grid-cols-3">
-      <div v-for="(item, index) in parsedResponse.features" :key="index" class="p-4 rounded-md bg-gradient-to-r from-green-400 to-blue-500">
-        <h2 class="text-lg font-bold">Feature</h2>
-        <p>{{ item }}</p>
+      <div v-for="(item, index) in parsedResponse.features" :key="index" class="min-h-30 p-4 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 animate-appear">
+        <h2 class="text-lg font-bold text-blue-300">Feature</h2>
+        <p class="text-gray-300">{{ item }}</p>
       </div>
-      <div class="p-4 rounded-md bg-gradient-to-r from-purple-400 to-pink-500">
-        <h2 class="text-lg font-bold">Description</h2>
-        <p>{{ parsedResponse.description }}</p>
+      <div class="p-4 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 animate-appear min-h-30">
+        <h2 class="text-lg font-bold text-green-300">Description</h2>
+        <p class="text-gray-300">{{ parsedResponse.description }}</p>
       </div>
-      <div class="p-4 rounded-md bg-gradient-to-r from-yellow-400 to-red-500">
-        <h2 class="text-lg font-bold">Price</h2>
-        <p>{{ parsedResponse.price }}</p>
+      <div class="p-4 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 animate-appear min-h-30">
+        <h2 class="text-lg font-bold text-red-300">Price</h2>
+        <p class="text-gray-300">{{ parsedResponse.price }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <style>
+@keyframes appear {
+  from {
+    filter: hue-rotate(0deg);
+    transform: scale(0.5);
+  }
+  to {
+    filter: hue-rotate(360deg);
+    transform: scale(1);
+  }
+}
+.animate-appear {
+  animation: appear 0.5s ease-in-out;
+}
 </style>
