@@ -36,6 +36,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <h1 class="text-2xl font-bold">Websockets</h1>
   <div class="p-4 bg-gray-800 rounded-lg shadow">
     <ul class="mb-4 space-y-2">
       <li v-for="message of state.messages" :key="message" class="text-gray-300">

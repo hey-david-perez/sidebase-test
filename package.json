@@ -14,11 +14,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^0.0.60",
     "@prisma/client": "^5.18.0",
     "@trpc/client": "^10.45.2",
     "@trpc/server": "^10.45.2",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",
+    "ai": "^3.3.43",
+    "best-effort-json-parser": "^1.1.2",
     "crossws": "^0.3.1",
     "nuxt": "^3.12.4",
     "nuxt-scheduler": "^0.1.9",

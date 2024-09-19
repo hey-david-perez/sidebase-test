@@ -1,5 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    openaiApiKey: process.env.OPENAI_API_KEY,
+  },
+  routeRules:{
+    '/dashboard': {
+      cache: {
+
+      }
+    }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@bg-dev/nuxt-naiveui',
@@ -42,7 +52,4 @@ export default defineNuxtConfig({
     shim: false
   },
   compatibilityDate: '2024-09-19',
-  devtools: {
-    enabled: false,
-  }
 })

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { WelcomeLLMDemo } from '#build/components';
+</script>
+
 <template>
   <div class="wrapper">
     <div class="margins" style="padding-top: 3rem; ">
@@ -31,12 +35,15 @@
           <WelcomeI18nDemo />
         </div>
         <div class="card">
-          <ClientOnly>
-            <WelcomeWebSockets/>
-          </ClientOnly>
+          <WelcomeWebSockets/>
         </div>
       </div>
     </div>
+    <ClientOnly>
+      <div class="card container mx-auto">
+        <WelcomeStreamDemo/>
+      </div>
+    </ClientOnly>
 
     <div class="margins footer">
       <div style="color: #D1D5DB">
