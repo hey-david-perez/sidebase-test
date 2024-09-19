@@ -8,8 +8,8 @@ function startScheduler() {
     const scheduler = useScheduler()
   
     scheduler.run(() => {
-      console.log("SHEDULER: I run every 10 seconds")
-    }).everySeconds(10)
+      console.log("SHEDULER: I run every minute")
+    }).everyMinute()
   
     // scheduler.run(() => {
     //   console.log("I run every 5 seconds")
