@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     'nuxt-scheduler',
     '@vueuse/nuxt'
   ],
+  auth: {
+    baseURL: process.env.AUTH_ORIGIN
+  },
   nitro: {
     experimental: {
       tasks: true,
