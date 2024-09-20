@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { parse } from 'best-effort-json-parser'
-
+import { ref, computed } from 'vue'
+import Mermaid from 'vue-mermaid-string'
 
 const message = ref(`ADVANCED PASSIVE NOISE CANCELLATION — sturdy closed earcups fully cover ears to prevent noise from leaking into the headset, with its cushions providing a closer seal for more sound isolation.
 7.1 SURROUND SOUND FOR POSITIONAL AUDIO — Outfitted with custom-tuned 50 mm drivers, capable of software-enabled surround sound. *Only available on Windows 10 64-bit
@@ -63,17 +64,17 @@ async function handleSendMessage() {
     <textarea v-model="message" placeholder="Enter your message" class="bg-gray-800 w-full p-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
     <button @click="handleSendMessage" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Send</button>
     <div v-if="parsedResponse" class="gap-4 grid grid-cols-3">
-      <div v-for="(item, index) in parsedResponse.features" :key="index" class="min-h-30 p-4 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 animate-appear">
-        <h2 class="text-lg font-bold text-blue-300">Feature</h2>
-        <p class="text-gray-300">{{ item }}</p>
-      </div>
-      <div class="p-4 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 animate-appear min-h-30">
-        <h2 class="text-lg font-bold text-green-300">Description</h2>
-        <p class="text-gray-300">{{ parsedResponse.description }}</p>
-      </div>
-      <div class="p-4 rounded-md bg-gradient-to-r from-gray-700 to-gray-900 animate-appear min-h-30">
-        <h2 class="text-lg font-bold text-red-300">Price</h2>
-        <p class="text-gray-300">{{ parsedResponse.price }}</p>
+      <div v-for="(value, key) in parsedResponse" :key="key" class="min-h-30 p-4 rounded-md bg-gray-700">
+        <h2 class="text-lg font-bold text-white">{{ key }}</h2>
+        <div v-if="Array.isArray(value)">
+          <div v-for="(item, index) in value" :key="index" class="p-2 bg-gray-600 rounded-md mt-2">
+            <p class="text-gray-300">{{ item }}</p>
+          </div>
+        </div>
+        <p v-else-if="typeof value === 'string' && value.includes('graph')" class="text-gray-300">
+          <Mermaid :value="value" />
+        </p>
+        <p v-else class="text-gray-300">{{ value }}</p>
       </div>
     </div>
   </div>

@@ -19,6 +19,8 @@ const handler = defineLazyEventHandler(async () => {
         features: z.array(z.string()),
         description: z.string(),
         price: z.number(),
+        industry: z.array(z.string()),
+        // mermaidChartString: z.string().describe('Simple linear path'),
       }),
       schemaName: 'ProductDescription',
       schemaDescription: 'Analyze a product description and extract its features, description and price',
