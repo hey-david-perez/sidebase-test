@@ -8,13 +8,13 @@ function handleClick(path: string) {
 
 <template>
   <div class="nav">
-    <button @click="handleClick('sockets')">
+    <button @click="handleClick('/demo/sockets')">
       sockets
     </button>
-    <button @click="handleClick('bullmq')">
+    <button @click="handleClick('/demo/bullmq')">
       bullmq
     </button>
-    <button @click="handleClick('crons')">
+    <button @click="handleClick('/demo/crons')">
       crons
     </button>
   </div>
