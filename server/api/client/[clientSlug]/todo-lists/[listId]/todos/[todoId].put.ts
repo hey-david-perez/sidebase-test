@@ -1,4 +1,6 @@
-export default defineEventHandler(async (event) => {
+import { defineMyHandler } from '~/server/utils/responseMiddlewareHandler'
+
+export default defineMyHandler(async (event) => {
   const todoId = getRouterParam(event, 'todoId')
   const body = await readBody(event)
 
