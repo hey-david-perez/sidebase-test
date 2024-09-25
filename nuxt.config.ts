@@ -11,15 +11,6 @@ export default defineNuxtConfig({
   auth: {
     baseURL: process.env.AUTH_ORIGIN
   },
-  nitro: {
-    experimental: {
-      tasks: true,
-      openAPI: true,
-    },
-    scheduledTasks: {
-      '* * * * 1': ['nitrotask']
-    },
-  },
   i18n: {
     strategy: 'prefix_except_default',
     lazy: true,

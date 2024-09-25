@@ -9,146 +9,39 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model ActionBank {
-  id                Int                 @id @default(autoincrement())
-  FAARAugmentations FAARAugmentations[]
+enum TodoStatus {
+  TODO
+  DONE
 }
 
-model Agents {
-  id           Int         @id @default(autoincrement())
-  dimensionsId Int?
-  new_field    String
-  Dimensions   Dimensions? @relation(fields: [dimensionsId], references: [id])
+enum ListStatus {
+  ONTIME
+  LATE
+  COMPLETED
 }
 
-model AssetColumnsMetadata {
-  id            Int             @id @default(autoincrement())
-  AssetMetadata AssetMetadata[]
+model Todo {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?
+  status      TodoStatus? @default(TODO)
+  dueTo       DateTime?
+  TodoList    TodoList?  @relation(fields: [todoListId], references: [id])
+  todoListId  Int?
 }
 
-model AssetMetadata {
-  id                     Int                   @id @default(autoincrement())
-  clientMetadataId       Int?
-  assetColumnsMetadataId Int?
-  AssetColumnsMetadata   AssetColumnsMetadata? @relation(fields: [assetColumnsMetadataId], references: [id])
-  ClientMetadata         ClientMetadata?       @relation(fields: [clientMetadataId], references: [id])
-  DataFileTransfer       DataFileTransfer[]
+model TodoList {
+  id       Int        @id @default(autoincrement())
+  name     String
+  tasks    Todo[]
+  status   ListStatus?
+  Client   Client?    @relation(fields: [clientId], references: [id])
+  clientId Int?
 }
 
-model ClientMetadata {
-  id            Int             @id @default(autoincrement())
-  AssetMetadata AssetMetadata[]
-}
-
-model DataFileTransfer {
-  id              Int            @id @default(autoincrement())
-  gcpPaths        String
-  assetMetadataId Int?
-  AssetMetadata   AssetMetadata? @relation(fields: [assetMetadataId], references: [id])
-}
-
-model Dimensions {
-  id        Int      @id @default(autoincrement())
-  regimesId Int?
-  Agents    Agents[]
-  Regimes   Regimes? @relation(fields: [regimesId], references: [id])
-}
-
-model EventSequences {
-  id                  Int                   @id @default(autoincrement())
-  eventsId            Int?
-  Events              Events?               @relation(fields: [eventsId], references: [id])
-  TrainingExperiences TrainingExperiences[]
-}
-
-model Events {
-  id                  Int                @id @default(autoincrement())
-  faarAugmentationsId Int?
-  EventSequences      EventSequences[]
-  FAARAugmentations   FAARAugmentations? @relation(fields: [faarAugmentationsId], references: [id])
-}
-
-model FAARAugmentations {
-  id           Int         @id @default(autoincrement())
-  actionBankId Int?
-  Events       Events[]
-  ActionBank   ActionBank? @relation(fields: [actionBankId], references: [id])
-}
-
-model FeatureData {
-  id            Int          @id @default(autoincrement())
-  filterLogicId Int?
-  FilterLogic   FilterLogic? @relation(fields: [filterLogicId], references: [id])
-}
-
-model FilterAndAugmentRecs {
-  id           Int         @id @default(autoincrement())
-  predictionId Int?
-  Prediction   Prediction? @relation(fields: [predictionId], references: [id])
-}
-
-model FilterComparators {
-  id            Int          @id @default(autoincrement())
-  filterLogicId Int?
-  FilterLogic   FilterLogic? @relation(fields: [filterLogicId], references: [id])
-}
-
-model FilterLogic {
-  id                Int                 @id @default(autoincrement())
-  FeatureData       FeatureData[]
-  FilterComparators FilterComparators[]
-}
-
-model Prediction {
-  id                   Int                    @id @default(autoincrement())
-  FilterAndAugmentRecs FilterAndAugmentRecs[]
-}
-
-model Regimes {
-  id         Int          @id @default(autoincrement())
-  Dimensions Dimensions[]
-}
-
-model ReportingDriverTreeKPINodes {
-  id                     Int                   @id @default(autoincrement())
-  reportingDriverTreesId Int?
-  ReportingDriverTrees   ReportingDriverTrees? @relation(fields: [reportingDriverTreesId], references: [id])
-}
-
-model ReportingDriverTrees {
-  id                          Int                           @id @default(autoincrement())
-  ReportingDriverTreeKPINodes ReportingDriverTreeKPINodes[]
-
-  @@index([id])
-}
-
-model ReportingKPIs {
-  id               Int                @id @default(autoincrement())
-  ReportingMetrics ReportingMetrics[]
-}
-
-model ReportingMetrics {
-  id                Int                 @id @default(autoincrement())
-  reportingKPIsId   Int?
-  ReportingKPIs     ReportingKPIs?      @relation(fields: [reportingKPIsId], references: [id])
-  ReportingSegments ReportingSegments[]
-}
-
-model ReportingSegments {
-  id                 Int               @id @default(autoincrement())
-  reportingMetricsId Int?
-  ReportingMetrics   ReportingMetrics? @relation(fields: [reportingMetricsId], references: [id])
-}
-
-model TrainingExperiences {
-  id               Int             @id @default(autoincrement())
-  eventSequencesId Int?
-  EventSequences   EventSequences? @relation(fields: [eventSequencesId], references: [id])
-}
-
-model Messages {
-  id        Int      @id @default(autoincrement())
-  created_at  DateTime @default(now())
-  user        String
-  message     String
+model Client {
+  id        Int        @id @default(autoincrement())
+  name      String
+  slug      String
+  TaskLists TodoList[]
 }

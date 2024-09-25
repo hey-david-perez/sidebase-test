@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Todo" ALTER COLUMN "description" DROP NOT NULL,
+ALTER COLUMN "status" DROP NOT NULL,
+ALTER COLUMN "dueTo" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "TodoList" ALTER COLUMN "status" DROP NOT NULL;
