@@ -26,7 +26,7 @@ model Todo {
   description String?
   status      TodoStatus? @default(TODO)
   dueTo       DateTime?
-  TodoList    TodoList?  @relation(fields: [todoListId], references: [id])
+  TodoList    TodoList?  @relation(fields: [todoListId], references: [id], onDelete: Cascade)
   todoListId  Int?
 }
 
@@ -35,7 +35,7 @@ model TodoList {
   name     String
   tasks    Todo[]
   status   ListStatus?
-  Client   Client?    @relation(fields: [clientId], references: [id])
+  Client   Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
   clientId Int?
 }
 

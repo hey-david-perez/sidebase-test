@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Todo } from '@prisma/client'
-import { TodoStatus } from '@prisma/client'
+import { io } from 'socket.io-client'
 
 const newListName = ref<string>()
 
@@ -12,20 +12,19 @@ const newTaskDueTo = ref<string>()
 const showListModal = ref<boolean>()
 const showTaskModal = ref<boolean>()
 
-const options = [
-  {
-    label: 'Done',
-    value: TodoStatus.DONE
-  },
-  {
-    label: 'To do',
-    value: TodoStatus.TODO
-  }
-]
+const socket = io('ws://localhost:4040')
 
 const { data: todoLists, refresh } = await useFetch('/api/client/test/todo-lists', {
   headers: { Authorization: '234' },
   key: `Todo list`
+})
+
+socket.on('updateListStatus', (args) => {
+  todoLists.value?.forEach((list) => {
+    if (list.id === args.listId) {
+      list.status = args.status
+    }
+  })
 })
 
 async function createNewTaskModal(listId: number) {
@@ -79,6 +78,8 @@ function updateTodoHandler(listId: number, todoId: number,) {
       method: 'PUT',
       body
     })
+
+    socket.emit('updateTodoStatus', { listId })
   }
   return handler
 }

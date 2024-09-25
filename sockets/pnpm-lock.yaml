@@ -11,6 +11,9 @@ importers:
       http:
         specifier: 0.0.1-security
         version: 0.0.1-security
+      prisma:
+        specifier: file:../node_modules/@prisma/client
+        version: '@prisma/client@file:../node_modules/@prisma/client(@prisma/client@5.19.1)'
     devDependencies:
       socket.io:
         specifier: ^4.7.5
@@ -20,6 +23,15 @@ importers:
         version: 5.6.2
 
 packages:
+
+  '@prisma/client@file:../node_modules/@prisma/client':
+    resolution: {directory: ../node_modules/@prisma/client, type: directory}
+    engines: {node: '>=16.13'}
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
 
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
@@ -124,6 +136,10 @@ packages:
         optional: true
 
 snapshots:
+
+  '@prisma/client@file:../node_modules/@prisma/client(@prisma/client@5.19.1)':
+    optionalDependencies:
+      prisma: '@prisma/client@file:../node_modules/@prisma/client(@prisma/client@5.19.1)'
 
   '@socket.io/component-emitter@3.1.2': {}
 
