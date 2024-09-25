@@ -5,8 +5,19 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+// queue generates the jobs to be processed
+const listsQueue = new Queue('processListStatus', { connection: {
+  host: 'localhost',
+  port: 6379
+} })
+
+const dummyQueue = new Queue('dummyQueue', { connection: {
+  host: 'localhost',
+  port: 6379
+} })
+
 // worker processes the jobs
-const worker = new Worker('processListStatus', async (job) => {
+const listsWorker = new Worker('processListStatus', async (job) => {
   let status: ListStatus
   if (job.data.tasks.some(task => new Date(task.dueTo) < new Date()) && job.data.status !== 'COMPLETED') {
     status = 'LATE'
@@ -23,6 +34,7 @@ const worker = new Worker('processListStatus', async (job) => {
     }
   })
   console.log(list)
+  dummyQueue.add('from_job', { foo: 'dummy', bar: 'dummy' })
 }, {
   connection: {
     host: 'localhost',
@@ -32,11 +44,14 @@ const worker = new Worker('processListStatus', async (job) => {
   concurrency: 50
 })
 
-// queue generates the jobs to be processed
-const myQueue = new Queue('processListStatus', { connection: {
-  host: 'localhost',
-  port: 6379
-} })
+const dummyWorker = new Worker('dummyQueue', async (job) => {
+  console.log(job.data.foo, job.data.bar)
+}, {
+  connection: {
+    host: 'localhost',
+    port: 6379
+  }
+})
 
 // schedule job for each list every minute
 cron.schedule('* * * * *', async () => {
@@ -48,18 +63,18 @@ cron.schedule('* * * * *', async () => {
 
   // For each todo list enqueue a job
   todoLists.forEach((list) => {
-    myQueue.add(`list_${list.name}_${list.id}`, { tasks: list.tasks, listId: list.id, status: list.status })
+    listsQueue.add(`list_${list.name}_${list.id}`, { tasks: list.tasks, listId: list.id, status: list.status })
   })
 })
 
-worker.on('active', (job) => {
+listsWorker.on('active', (job) => {
   console.log(`${job.name} is being processed`)
 })
 
-worker.on('completed', (job) => {
+listsWorker.on('completed', (job) => {
   console.log(`${job.name} has completed!`)
 })
 
-worker.on('failed', (job, err) => {
+listsWorker.on('failed', (job, err) => {
   console.log(`${job.name} has failed with ${err.message}`)
 })

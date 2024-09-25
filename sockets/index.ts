@@ -34,6 +34,28 @@ io.on('connection', (socket) => {
           }
         })
       }
+      else if (list.tasks.some(task => new Date(task.dueTo) < new Date())) {
+        socket.emit('updateListStatus', { listId: args.listId, status: 'LATE' })
+        prisma.todoList.update({
+          where: {
+            id: args.listId,
+          },
+          data: {
+            status: 'LATE'
+          }
+        })
+      }
+      else {
+        socket.emit('updateListStatus', { listId: args.listId, status: 'ONTIME' })
+        prisma.todoList.update({
+          where: {
+            id: args.listId,
+          },
+          data: {
+            status: 'ONTIME'
+          }
+        })
+      }
     })
   })
 })

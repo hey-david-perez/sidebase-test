@@ -23,7 +23,7 @@ const newStatus = ref<TodoStatus>()
 
 watch([newDueTo, newStatus], async () => {
   props.updateHandler({
-    dueTo: new Date(newDueTo.value),
+    dueTo: new Date(newDueTo.value || new Date(props.todo.dueTo!)),
     status: newStatus.value
   })
 })
