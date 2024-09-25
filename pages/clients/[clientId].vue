@@ -24,6 +24,7 @@ const options = [
 ]
 
 const { data: todoLists, refresh } = await useFetch('/api/client/test/todo-lists', {
+  headers: { Authorization: '234' },
   key: `Todo list`
 })
 
@@ -34,6 +35,7 @@ async function createNewTaskModal(listId: number) {
 
 async function createListHandler() {
   await $fetch('/api/client/test/todo-lists', {
+    headers: { Authorization: '234' },
     method: 'POST',
     body: { name: newListName.value },
   })
@@ -43,6 +45,7 @@ async function createListHandler() {
 
 async function createTaskHandler(listId: number) {
   await $fetch(`/api/client/test/todo-lists/${listId}/todos`, {
+    headers: { Authorization: '234' },
     method: 'POST',
     body: { title: newTaskTitle.value, description: newTaskDescription.value, dueTo: newTaskDueTo.value },
   })
@@ -52,6 +55,7 @@ async function createTaskHandler(listId: number) {
 
 async function deleteListHandler(listId: number) {
   await $fetch(`/api/client/test/todo-lists/${listId}`, {
+    headers: { Authorization: '234' },
     method: 'DELETE'
   })
   refresh()
@@ -60,6 +64,7 @@ async function deleteListHandler(listId: number) {
 function deleteTodoHandler(listId: number, todoId: number) {
   async function handler() {
     await $fetch(`/api/client/test/todo-lists/${listId}/todos/${todoId}`, {
+      headers: { Authorization: '234' },
       method: 'DELETE'
     })
     refresh()
@@ -70,6 +75,7 @@ function deleteTodoHandler(listId: number, todoId: number) {
 function updateTodoHandler(listId: number, todoId: number,) {
   async function handler(body: Partial<Todo>) {
     await $fetch(`/api/client/test/todo-lists/${listId}/todos/${todoId}`, {
+      headers: { Authorization: '234' },
       method: 'PUT',
       body
     })

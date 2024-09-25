@@ -1,7 +1,11 @@
 export default eventHandler((event) => {
-  console.log('aaaa')
-  if (!event.path.startsWith('/clients/')) {
-    console.log('este no')
+  if (!event.path.startsWith('/api/client/')) {
+    return
   }
-  console.log('este si')
+  if (!getHeader(event, 'Authorization')) {
+    throw createError({
+      statusMessage: 'Unauthenticated',
+      statusCode: 403
+    })
+  }
 })
