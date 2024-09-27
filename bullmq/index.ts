@@ -34,7 +34,7 @@ const listsWorker = new Worker('processListStatus', async (job) => {
     }
   })
   console.log(list)
-  dummyQueue.add('from_job', { foo: 'dummy', bar: 'dummy' })
+  // dummyQueue.add('from_job', { foo: 'dummy', bar: 'dummy' })
 }, {
   connection: {
     host: 'localhost',
