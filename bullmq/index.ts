@@ -6,10 +6,10 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 // queue generates the jobs to be processed
-const listsQueue = new Queue('processListStatus', { connection: {
-  host: 'localhost',
-  port: 6379
-} })
+// const listsQueue = new Queue('processListStatus', { connection: {
+//   host: 'localhost',
+//   port: 6379
+// } })
 
 const dummyQueue = new Queue('dummyQueue', { connection: {
   host: 'localhost',
@@ -54,18 +54,18 @@ const dummyWorker = new Worker('dummyQueue', async (job) => {
 })
 
 // schedule job for each list every minute
-cron.schedule('* * * * *', async () => {
-  const todoLists = await prisma.todoList.findMany({
-    include: {
-      tasks: true
-    }
-  })
+// cron.schedule('* * * * *', async () => {
+//   const todoLists = await prisma.todoList.findMany({
+//     include: {
+//       tasks: true
+//     }
+//   })
 
-  // For each todo list enqueue a job
-  todoLists.forEach((list) => {
-    listsQueue.add(`list_${list.name}_${list.id}`, { tasks: list.tasks, listId: list.id, status: list.status })
-  })
-})
+//   // For each todo list enqueue a job
+//   todoLists.forEach((list) => {
+//     listsQueue.add(`list_${list.name}_${list.id}`, { tasks: list.tasks, listId: list.id, status: list.status })
+//   })
+// })
 
 listsWorker.on('active', (job) => {
   console.log(`${job.name} is being processed`)

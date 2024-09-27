@@ -47,6 +47,12 @@ export default defineNuxtConfig({
         handler: './server/routeMiddleware/helloMiddleware',
         middleware: true
 
+      },
+      {
+        route: '/api/client',
+        handler: './server/routeMiddleware/secondRouteMiddleware',
+        middleware: true
+
       }
     ]
   }
