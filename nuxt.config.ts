@@ -39,5 +39,15 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-09-19',
   devtools: {
     enabled: false,
+  },
+  nitro: {
+    handlers: [
+      {
+        route: '/api/client',
+        handler: './server/routeMiddleware/helloMiddleware',
+        middleware: true
+
+      }
+    ]
   }
 })
